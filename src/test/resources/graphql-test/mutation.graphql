@@ -1,0 +1,11 @@
+mutation ($graphqlObject: GraphqlObjectInput!){
+    publishGraphqlObject (
+        graphqlObjectInput: $graphqlObject
+    ) {
+        chanel
+        entries {
+            key
+            value
+        }
+    }
+}

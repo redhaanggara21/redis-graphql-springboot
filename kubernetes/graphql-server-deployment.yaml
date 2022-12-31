@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-server
+  labels:
+    service: graphql-server
+    service-type: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: graphql-server
+      service-type: backend
+  template:
+    metadata:
+      labels:
+        service: graphql-server
+        service-type: backend
+    spec:
+      containers:
+      - env:
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                key: REDIS_HOST
+                name: env
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                key: REDIS_PORT
+                name: env
+          - name: REDIS_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                key: REDIS_PASSWORD
+                name: env
+        image: graphql-server
+        imagePullPolicy: "IfNotPresent"
+        name: graphql-server
+        ports:
+        - containerPort: 4000
+        - containerPort: 4003
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+      restartPolicy: Always
+
+

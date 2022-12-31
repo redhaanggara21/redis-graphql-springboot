@@ -1,0 +1,31 @@
+type Query {
+    root: String
+}
+
+type Subscription {
+    graphqlObjectPublished(chanel: String!): GraphqlObject
+}
+
+type Mutation {
+    publishGraphqlObject(graphqlObjectInput: GraphqlObjectInput!): GraphqlObject
+}
+
+type GraphqlObject {
+    chanel: String
+    entries: [GraphqlEntry]
+}
+
+input GraphqlObjectInput {
+    chanel: String
+    entries: [GraphqlEntryInput]
+}
+
+type GraphqlEntry {
+    key: String
+    value: String
+}
+
+input GraphqlEntryInput {
+    key: String
+    value: String
+}

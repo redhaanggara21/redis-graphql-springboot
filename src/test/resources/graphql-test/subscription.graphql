@@ -1,0 +1,9 @@
+subscription ($chanel: String!){
+    graphqlObjectPublished(chanel: $chanel) {
+        chanel
+        entries {
+            key
+            value
+        }
+    }
+}
